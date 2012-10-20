@@ -10,7 +10,7 @@
 			"email": "ben.tollakson@gmail.com"
 		}
 	],
-	"version": "1.0.0",
+	"version": "dev",
 	"require": {
 		"php": ">=5.3.2",
 		"knplabs/gaufrette": "0.1.x"
