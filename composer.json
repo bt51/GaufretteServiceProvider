@@ -1,0 +1,27 @@
+{
+	"name": "bt51/gaufrette-serviceprovider",
+	"keywords": ["silex", "extension", "silex-extension", "gaufrette"],
+	"type": "library",
+	"license": "MIT",
+	"description": "Gaufrette service provider for silex",
+	"authors": [
+		{
+			"name": "Ben Tollakson",
+			"email": "ben.tollakson@gmail.com"
+		}
+	],
+	"version": "1.0.0",
+	"require": {
+		"php": ">=5.3.2",
+		"knplabs/gaufrette": "0.1.x"
+	},
+	"require-dev": {
+        "silex/silex": "1.0.x-dev"
+    },
+	"autoload": {
+		"psr-0": {
+			"Bt51\\Silex\\Provider\\GaufretteServiceProvider": "src/"
+		}
+	},
+	"minimum-stability": "dev"
+}
