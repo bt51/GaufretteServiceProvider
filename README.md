@@ -27,7 +27,7 @@ Parameters
 Services
 --------
 
-* **gaufrette.filesystem**: Instance of dflydev\markdown\MarkdownParser
+* **gaufrette.filesystem**: Instance of Gaufrette\Filesystem
 * **gaufrette.cache**: Instance of Gaufrette\Adapter\Cache if cache parameter is provider
 * **gaufrette.adapter**: Instance of Gaufrette\Adapter\{gaufrette.adapter.class}
 * **gaufrette.adapter.cache**: Instance of Gaufrette\Adapter\{gaufrette.adapter.cache.class} if provided
