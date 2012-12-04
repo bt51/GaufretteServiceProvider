@@ -25,12 +25,26 @@ class GaufretteServiceProviderTest extends \PHPUnit_Framework_TestCase
     
     public function testSilexGaufrette()
     {
-        
         $app = new Application();
         
         $app->register(new GaufretteServiceProvider(),
                        array('gaufrette.adapter.class' => 'InMemory'));
+        $app->boot();
         
         $this->assertInstanceOf('\\Gaufrette\\Filesystem', $app['gaufrette.filesystem']);
+    }
+    
+    public function testGaufretteCache()
+    {
+        $app = new Application();
+        
+        $app->register(new GaufretteServiceProvider(),
+                       array('gaufrette.adapter.class' => 'InMemory',
+                             'gaufrette.adapter.cache.class' => 'Local',
+                             'gaufrette.cache.options' => array(__DIR__ . '/cache')));
+        
+        $app->boot();
+        
+        $this->assertInstanceOf('\\Gaufrette\\Adapter\\Cache', $app['gaufrette.cache']);
     }
 }

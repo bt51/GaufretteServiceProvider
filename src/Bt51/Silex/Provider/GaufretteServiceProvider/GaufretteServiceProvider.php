@@ -39,25 +39,24 @@ class GaufretteServiceProvider implements ServiceProviderInterface
             $class = sprintf('\\Gaufrette\\Adapter\\%s', $app['gaufrette.adapter.cache.class']);
             $adapter = new \ReflectionClass($class);
             return $adapter->newInstanceArgs($options);
-        });
-        
-        $app['gaufrette.filesystem'] = $app->share(function ($app) {
-            if ($app['gaufrette.adapter.cache']) {
-                $app['gaufrette.cache'] = $app->share(function ($app) {
-                    return new Cache($app['gaufrette.adapter'], $app['gaufrette.adapter.cache']);
-                });
-            }
-            
-            if (isset($app['gaufrette.cache'])) {
-                return new Filesystem($app['gaufrette.cache']);
-            } else {
-                return new Filesystem($app['gaufrette.adapter']);
-            }
-        });   
+        });  
     }
     
     public function boot(Application $app)
     {
+        if ($app['gaufrette.adapter.cache']) {
+            $app['gaufrette.cache'] = $app->share(function ($app) {
+                $ttl = isset($app['gaufrette.cache.ttl']) ? $app['gaufrette.cache.ttl'] : 0;
+                return new Cache($app['gaufrette.adapter'], $app['gaufrette.adapter.cache'], $ttl);
+            });
+        }
         
+        $app['gaufrette.filesystem'] = $app->share(function ($app) {
+            if (isset($app['gaufrette.cache'])) {
+                return new Filesystem($app['gaufrette.cache']);
+            }
+            
+            return new Filesystem($app['gaufrette.adapter']);
+        }); 
     }
 }
